@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Update Apt cache
+      apt:
+        update_cache: yes
+ 
+    - name: Upgrade package
+      apt:
+        upgrade: dist
+        autoremove: yes
+
+- hosts: CentOS
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Update dnf cache
+      dnf:
+        update_cache: yes
+
+    - name: Upgrade packages
+      dnf:
+        name: '*'
+        state: latest
